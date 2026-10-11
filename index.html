@@ -1,0 +1,1251 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Missão Direitos Humanos</title>
+
+<style>
+*{
+    box-sizing:border-box;
+}
+
+body{
+    margin:0;
+    font-family:Arial,Helvetica,sans-serif;
+    background:linear-gradient(135deg,#101827,#172554,#312e81);
+    color:#fff;
+    min-height:100vh;
+}
+
+.container{
+    width:95%;
+    max-width:1100px;
+    margin:auto;
+    padding:20px;
+}
+
+.card{
+    background:rgba(255,255,255,.10);
+    border:1px solid rgba(255,255,255,.15);
+    border-radius:22px;
+    padding:25px;
+    margin-bottom:20px;
+    backdrop-filter:blur(10px);
+    box-shadow:0 10px 30px rgba(0,0,0,.25);
+}
+
+h1{
+    font-size:clamp(28px,5vw,48px);
+    margin:5px 0 10px;
+}
+
+h2{
+    font-size:clamp(22px,4vw,34px);
+}
+
+.subtitle{
+    color:#cbd5e1;
+    font-size:18px;
+}
+
+input{
+    width:100%;
+    padding:15px;
+    border:none;
+    border-radius:12px;
+    margin:8px 0 15px;
+    font-size:16px;
+}
+
+button{
+    border:none;
+    border-radius:12px;
+    padding:14px 20px;
+    font-size:16px;
+    font-weight:bold;
+    cursor:pointer;
+    transition:.2s;
+}
+
+button:hover{
+    transform:scale(1.03);
+}
+
+.btn{
+    background:#38bdf8;
+    color:#082f49;
+}
+
+.hidden{
+    display:none;
+}
+
+.topbar{
+    display:flex;
+    justify-content:space-between;
+    gap:10px;
+    flex-wrap:wrap;
+}
+
+.badge{
+    display:inline-block;
+    padding:7px 12px;
+    border-radius:20px;
+    font-size:13px;
+    font-weight:bold;
+}
+
+.facil{
+    background:#22c55e;
+    color:#052e16;
+}
+
+.medio{
+    background:#facc15;
+    color:#422006;
+}
+
+.dificil{
+    background:#ef4444;
+    color:#fff;
+}
+
+.progress{
+    width:100%;
+    height:14px;
+    background:#334155;
+    border-radius:20px;
+    overflow:hidden;
+    margin:15px 0;
+}
+
+.progress-bar{
+    height:100%;
+    width:0%;
+    background:#38bdf8;
+    transition:.4s;
+}
+
+.comic{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
+    gap:12px;
+    margin:20px 0;
+}
+
+.panel{
+    background:#f8fafc;
+    color:#111827;
+    border-radius:15px;
+    padding:18px;
+    min-height:150px;
+    position:relative;
+}
+
+.person{
+    font-size:42px;
+}
+
+.fala{
+    background:#fff;
+    border:2px solid #cbd5e1;
+    border-radius:14px;
+    padding:10px;
+    margin-top:10px;
+}
+
+.question{
+    font-size:21px;
+    font-weight:bold;
+    line-height:1.4;
+}
+
+.option{
+    display:block;
+    width:100%;
+    text-align:left;
+    margin:10px 0;
+    background:#f8fafc;
+    color:#111827;
+    border:2px solid transparent;
+}
+
+.option:hover{
+    border-color:#38bdf8;
+}
+
+.option.correct{
+    background:#22c55e;
+    color:#052e16;
+}
+
+.option.wrong{
+    background:#ef4444;
+    color:#fff;
+}
+
+.feedback{
+    padding:15px;
+    border-radius:12px;
+    margin-top:15px;
+    line-height:1.5;
+}
+
+.feedback.ok{
+    background:rgba(34,197,94,.2);
+    border:1px solid #22c55e;
+}
+
+.feedback.no{
+    background:rgba(239,68,68,.2);
+    border:1px solid #ef4444;
+}
+
+.map{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(110px,1fr));
+    gap:8px;
+}
+
+.mission{
+    padding:12px;
+    border-radius:12px;
+    text-align:center;
+    background:#334155;
+    font-size:13px;
+}
+
+.mission.done{
+    background:#16a34a;
+}
+
+.mission.current{
+    background:#38bdf8;
+    color:#082f49;
+    font-weight:bold;
+}
+
+.result{
+    text-align:center;
+}
+
+.score{
+    font-size:70px;
+    font-weight:bold;
+    color:#38bdf8;
+}
+
+.warning{
+    background:rgba(250,204,21,.15);
+    border:1px solid #facc15;
+    padding:15px;
+    border-radius:12px;
+    margin-top:15px;
+}
+
+@media(max-width:600px){
+    .container{
+        width:100%;
+        padding:10px;
+    }
+
+    .card{
+        padding:18px;
+    }
+
+    .question{
+        font-size:18px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<!-- INÍCIO -->
+<section id="inicio" class="card">
+    <h1>🎯 MISSÃO DIREITOS HUMANOS</h1>
+
+    <p class="subtitle">
+        Uma aventura interativa sobre Direitos Humanos, cidadania,
+        desigualdade social e participação na sociedade.
+    </p>
+
+    <div class="warning">
+        🔀 <strong>ATENÇÃO:</strong> a ordem das missões e das alternativas
+        é embaralhada automaticamente a cada novo acesso.
+        Cada aluno poderá receber uma sequência diferente.
+    </div>
+
+    <h3>👤 Nome do aluno</h3>
+    <input id="nome" placeholder="Digite seu nome">
+
+    <h3>🏫 Turma</h3>
+    <input id="turma" placeholder="Digite sua turma">
+
+    <button class="btn" onclick="iniciar()">
+        🚀 COMEÇAR MISSÃO
+    </button>
+</section>
+
+
+<!-- JOGO -->
+<section id="jogo" class="hidden">
+
+    <div class="card">
+
+        <div class="topbar">
+
+            <div>
+                👤 <span id="nomeAluno"></span>
+            </div>
+
+            <div>
+                ⭐ XP: <span id="xp">0</span>
+            </div>
+
+            <div>
+                🎯 Questão <span id="numero"></span>/20
+            </div>
+
+        </div>
+
+        <div class="progress">
+            <div id="barra" class="progress-bar"></div>
+        </div>
+
+    </div>
+
+
+    <div class="card">
+
+        <div class="topbar">
+            <span id="dificuldade" class="badge"></span>
+            <span id="tema"></span>
+        </div>
+
+        <h2 id="titulo"></h2>
+
+        <!-- QUADRINHOS -->
+        <div id="comic" class="comic"></div>
+
+        <p class="question" id="pergunta"></p>
+
+        <div id="alternativas"></div>
+
+        <div id="feedback" class="hidden"></div>
+
+        <br>
+
+        <button id="proxima" class="btn hidden" onclick="proximaQuestao()">
+            ➡️ PRÓXIMA MISSÃO
+        </button>
+
+    </div>
+
+
+    <div class="card">
+
+        <h3>🗺️ MAPA DAS MISSÕES</h3>
+
+        <div id="mapa" class="map"></div>
+
+    </div>
+
+</section>
+
+
+<!-- FINAL -->
+<section id="final" class="card result hidden">
+
+    <h1>🏆 MISSÃO CONCLUÍDA!</h1>
+
+    <p id="mensagemFinal"></p>
+
+    <div class="score">
+        <span id="nota"></span>
+    </div>
+
+    <h2>
+        ⭐ <span id="xpFinal"></span> XP
+    </h2>
+
+    <p>
+        Acertos: <strong><span id="acertos"></span>/20</strong>
+    </p>
+
+    <div class="warning">
+        📸 <strong>IMPORTANTE:</strong><br>
+        Tire um print desta tela e envie sua pontuação
+        conforme orientação do professor.
+    </div>
+
+    <br>
+
+    <button class="btn" onclick="location.reload()">
+        🔄 JOGAR NOVAMENTE
+    </button>
+
+</section>
+
+</div>
+
+
+<script>
+
+/* =====================================================
+   BANCO DE MISSÕES
+===================================================== */
+
+const bancoMissoes = [
+
+{
+titulo:"Dignidade Humana",
+tema:"Conceitos e valores fundamentais",
+dificuldade:"Fácil",
+xp:50,
+comic:[
+["👨‍🎓","A dignidade é algo que pertence apenas a algumas pessoas?"],
+["👩‍🏫","Não. Todo ser humano possui dignidade."],
+["🧑","Então todas as pessoas devem ser respeitadas?"],
+["👩‍🏫","Exatamente! A dignidade é um valor inerente a todas as pessoas."]
+],
+pergunta:"O que significa afirmar que toda pessoa possui dignidade?",
+opcoes:[
+"Que toda pessoa possui valor próprio e deve ser respeitada.",
+"Que apenas pessoas com dinheiro possuem direitos.",
+"Que algumas pessoas valem mais que outras.",
+"Que os direitos dependem da profissão."
+],
+correta:0
+},
+
+{
+titulo:"Preço e Dignidade",
+tema:"Kant",
+dificuldade:"Fácil",
+xp:50,
+comic:[
+["🧑","Tudo pode ser comprado com dinheiro?"],
+["👩‍🏫","Para Kant, não. Pessoas possuem dignidade, não preço."],
+["🧑","Então uma pessoa não pode ser tratada como mercadoria?"],
+["👩‍🏫","Isso mesmo."]
+],
+pergunta:"Segundo a distinção apresentada por Kant, qual afirmação está correta?",
+opcoes:[
+"Pessoas possuem dignidade e não podem ser reduzidas a um preço.",
+"Todas as pessoas possuem um preço determinado.",
+"Somente objetos possuem valor.",
+"Dignidade depende da riqueza."
+],
+correta:0
+},
+
+{
+titulo:"Liberdade de Expressão",
+tema:"Liberdade e responsabilidade",
+dificuldade:"Fácil",
+xp:50,
+comic:[
+["🗣️","Posso falar absolutamente qualquer coisa sem responsabilidade?"],
+["👩‍🏫","A liberdade de expressão existe, mas deve considerar responsabilidade ética."],
+["🗣️","Então liberdade não significa ausência total de responsabilidade?"],
+["👩‍🏫","Exatamente."]
+],
+pergunta:"A liberdade de expressão deve ser compreendida como:",
+opcoes:[
+"Um direito acompanhado de responsabilidade ética.",
+"Um direito que permite qualquer prática.",
+"Um direito exclusivo dos governantes.",
+"Uma obrigação de concordar com todos."
+],
+correta:0
+},
+
+{
+titulo:"Direitos Universais",
+tema:"Declaração Universal dos Direitos Humanos",
+dificuldade:"Fácil",
+xp:50,
+comic:[
+["🌎","Os Direitos Humanos valem apenas para alguns países?"],
+["👩‍🏫","Não. Eles são apresentados como direitos universais."],
+["🌎","Então todas as pessoas devem ser consideradas titulares desses direitos?"],
+["👩‍🏫","Sim."]
+],
+pergunta:"A ideia de universalidade dos Direitos Humanos significa que:",
+opcoes:[
+"Os direitos fundamentais devem ser reconhecidos para todas as pessoas.",
+"Os direitos dependem exclusivamente da riqueza.",
+"Somente cidadãos de países ricos possuem direitos.",
+"Cada pessoa escolhe quais direitos os outros terão."
+],
+correta:0
+},
+
+{
+titulo:"Educação como Direito",
+tema:"Direitos sociais",
+dificuldade:"Fácil",
+xp:50,
+comic:[
+["🏫","A educação pode ser entendida como um direito social?"],
+["👩‍🏫","Sim. Ela é apresentada como um importante direito social."],
+["🎒","Então seu acesso tem relação com cidadania?"],
+["👩‍🏫","Sim."]
+],
+pergunta:"A educação, no conteúdo estudado, é apresentada como:",
+opcoes:[
+"Um direito social.",
+"Um privilégio exclusivo.",
+"Uma atividade sem relação com cidadania.",
+"Um direito apenas de trabalhadores."
+],
+correta:0
+},
+
+{
+titulo:"Direito ao Trabalho",
+tema:"Direitos sociais",
+dificuldade:"Fácil",
+xp:50,
+comic:[
+["👷","O trabalho aparece entre os direitos sociais?"],
+["👩‍🏫","Sim."],
+["👷","Então condições dignas de trabalho também são importantes?"],
+["👩‍🏫","Sim."]
+],
+pergunta:"O trabalho aparece no conteúdo como:",
+opcoes:[
+"Um dos direitos sociais.",
+"Um privilégio de poucas pessoas.",
+"Um direito exclusivamente político.",
+"Uma obrigação sem relação com direitos."
+],
+correta:0
+},
+
+{
+titulo:"Igualdade e Equidade",
+tema:"Igualdade",
+dificuldade:"Fácil",
+xp:50,
+comic:[
+["⚖️","Tratar todos exatamente da mesma forma sempre resolve as desigualdades?"],
+["👩‍🏫","Nem sempre. A equidade considera diferenças e necessidades."],
+["🧑","Então igualdade e equidade podem ser relacionadas, mas não são idênticas?"],
+["👩‍🏫","Isso mesmo."]
+],
+pergunta:"No conteúdo estudado, a equidade está relacionada à ideia de:",
+opcoes:[
+"Considerar diferenças e necessidades para promover justiça.",
+"Ignorar as diferenças entre as pessoas.",
+"Eliminar todos os direitos individuais.",
+"Dar direitos apenas a determinados grupos."
+],
+correta:0
+},
+
+{
+titulo:"Universalismo e Cultura",
+tema:"Universalismo e relativismo cultural",
+dificuldade:"Fácil",
+xp:50,
+comic:[
+["🌎","Defender direitos universais significa apagar todas as culturas?"],
+["👩‍🏫","Não. O universalismo pode defender valores fundamentais sem eliminar diferenças culturais legítimas."],
+["🌎","Então direitos universais e diversidade cultural podem ser discutidos juntos?"],
+["👩‍🏫","Sim."]
+],
+pergunta:"O universalismo apresentado no conteúdo:",
+opcoes:[
+"Defende valores fundamentais para todos sem necessariamente apagar diferenças culturais legítimas.",
+"Afirma que todas as culturas devem ser destruídas.",
+"Defende que nenhuma pessoa possui direitos.",
+"Considera apenas os costumes de um único país."
+],
+correta:0
+},
+
+{
+titulo:"Direitos no Cotidiano",
+tema:"Direitos Humanos na vida diária",
+dificuldade:"Fácil",
+xp:50,
+comic:[
+["🏥","Direitos Humanos aparecem apenas em documentos internacionais?"],
+["👩‍🏫","Não. Eles também aparecem no cotidiano."],
+["🏫","Como no acesso à escola e à saúde?"],
+["👩‍🏫","Exatamente."]
+],
+pergunta:"Qual situação representa um direito no cotidiano?",
+opcoes:[
+"Acesso à educação e à saúde.",
+"Impedimento de estudar.",
+"Violência contra trabalhadores.",
+"Exclusão permanente de determinados grupos."
+],
+correta:0
+},
+
+{
+titulo:"Direito a Ter Direitos",
+tema:"Hannah Arendt",
+dificuldade:"Fácil",
+xp:50,
+comic:[
+["👩","O que significa 'direito a ter direitos'?"],
+["👩‍🏫","A ideia está associada a Hannah Arendt e à possibilidade de pertencer a uma comunidade política."],
+["👩","Então cidadania está ligada à participação e ao reconhecimento de direitos?"],
+["👩‍🏫","Sim."]
+],
+pergunta:"A expressão 'direito a ter direitos' está associada a:",
+opcoes:[
+"Hannah Arendt.",
+"John Locke exclusivamente.",
+"Adam Smith.",
+"Auguste Comte."
+],
+correta:0
+},
+
+{
+titulo:"Cidadania",
+tema:"Cidadania ativa",
+dificuldade:"Intermediário",
+xp:75,
+comic:[
+["🧑","Ser cidadão significa apenas possuir documentos?"],
+["👩‍🏫","Não. Cidadania envolve o exercício de direitos civis, políticos e sociais."],
+["🗳️","Então participação também é importante?"],
+["👩‍🏫","Sim."]
+],
+pergunta:"A cidadania é apresentada como:",
+opcoes:[
+"Exercício ativo de direitos civis, políticos e sociais.",
+"Apenas posse de documentos.",
+"Exclusivamente participação eleitoral.",
+"Uma condição reservada às elites."
+],
+correta:0
+},
+
+{
+titulo:"Cidadania Formal",
+tema:"Cidadania formal e real",
+dificuldade:"Intermediário",
+xp:75,
+comic:[
+["⚖️","A lei pode afirmar que todos possuem direitos."],
+["🧑","Mas todos conseguem acessar esses direitos da mesma maneira?"],
+["👩‍🏫","Não necessariamente."],
+["🧑","Então existe diferença entre direito formal e acesso real."],
+["👩‍🏫","Exatamente."]
+],
+pergunta:"A cidadania formal pode ser diferente da cidadania real porque:",
+opcoes:[
+"O reconhecimento legal de direitos não garante automaticamente acesso igual a eles.",
+"Todos possuem exatamente as mesmas condições materiais.",
+"Os direitos escritos deixam de existir.",
+"A cidadania não possui relação com desigualdade."
+],
+correta:0
+},
+
+{
+titulo:"Desigualdade Social",
+tema:"Desigualdade estrutural",
+dificuldade:"Intermediário",
+xp:75,
+comic:[
+["🏫","Duas pessoas possuem formalmente o mesmo direito à educação."],
+["🧑","Mas uma pode ter muito mais dificuldade para acessar uma escola de qualidade."],
+["👩‍🏫","Isso ajuda a compreender a desigualdade estrutural."],
+["🧑","Então igualdade formal não significa igualdade de acesso."]
+],
+pergunta:"A desigualdade estrutural pode produzir:",
+opcoes:[
+"Acesso desigual a educação, saúde, segurança e trabalho.",
+"Fim automático das diferenças sociais.",
+"Direitos iguais na prática para todos.",
+"Ausência completa de diferenças sociais."
+],
+correta:0
+},
+
+{
+titulo:"Papel do Estado",
+tema:"Políticas públicas",
+dificuldade:"Intermediário",
+xp:75,
+comic:[
+["🏛️","Quem possui responsabilidade na garantia dos direitos?"],
+["👩‍🏫","O Estado possui papel fundamental por meio de políticas públicas."],
+["🏥","Como políticas de saúde e educação?"],
+["👩‍🏫","Exatamente."]
+],
+pergunta:"No conteúdo, o Estado atua na garantia dos direitos principalmente por meio de:",
+opcoes:[
+"Políticas públicas.",
+"Exclusão social.",
+"Proibição da participação social.",
+"Eliminação dos direitos."
+],
+correta:0
+},
+
+{
+titulo:"Sociedade Civil",
+tema:"Movimentos sociais e participação",
+dificuldade:"Intermediário",
+xp:75,
+comic:[
+["👥","Somente o Estado participa da defesa dos direitos?"],
+["👩‍🏫","Não. A sociedade civil também possui papel importante."],
+["✊","Movimentos sociais podem participar?"],
+["👩‍🏫","Sim, assim como organizações, sindicatos e associações."]
+],
+pergunta:"Qual grupo pode fazer parte da sociedade civil organizada?",
+opcoes:[
+"Movimentos sociais, sindicatos e associações.",
+"Apenas governos.",
+"Somente empresas multinacionais.",
+"Somente forças militares."
+],
+correta:0
+},
+
+{
+titulo:"Direitos e Acesso Real",
+tema:"Desigualdade e cidadania",
+dificuldade:"Intermediário",
+xp:75,
+comic:[
+["⚖️","A lei garante um direito."],
+["🧑","Mas fatores econômicos e sociais podem dificultar seu acesso."],
+["👩‍🏫","Por isso devemos diferenciar igualdade formal e acesso real."],
+["🧑","Entendi."]
+],
+pergunta:"O acesso real aos direitos pode ser afetado por:",
+opcoes:[
+"Desigualdades sociais e econômicas.",
+"Apenas pelas leis escritas.",
+"Somente pelas escolhas individuais.",
+"Nenhuma condição social."
+],
+correta:0
+},
+
+{
+titulo:"Cidadania Incompleta",
+tema:"Cidadania truncada",
+dificuldade:"Intermediário",
+xp:75,
+comic:[
+["🏥","Se uma pessoa possui direitos no papel, mas não consegue acessar serviços básicos..."],
+["👩‍🏫","Podemos falar em cidadania incompleta ou truncada."],
+["🧑","Então o problema está na distância entre o direito reconhecido e sua realização."]
+],
+pergunta:"A cidadania incompleta ou truncada ocorre quando:",
+opcoes:[
+"Os direitos existem formalmente, mas não são plenamente acessíveis na prática.",
+"Todos os direitos são efetivamente garantidos.",
+"Não existem leis.",
+"A população não possui nenhuma responsabilidade."
+],
+correta:0
+},
+
+{
+titulo:"Igualdade e Desigualdade",
+tema:"Acesso desigual",
+dificuldade:"Intermediário",
+xp:75,
+comic:[
+["⚖️","Duas pessoas possuem o mesmo direito formal."],
+["🧑","Mas podem enfrentar condições sociais muito diferentes."],
+["👩‍🏫","Isso mostra que igualdade formal não elimina automaticamente desigualdades."]
+],
+pergunta:"Qual relação é coerente com o conteúdo?",
+opcoes:[
+"Igualdade formal pode coexistir com desigualdade no acesso real.",
+"Igualdade formal elimina todas as desigualdades.",
+"Desigualdade social não afeta direitos.",
+"Direitos só existem quando há igualdade econômica."
+],
+correta:0
+},
+
+{
+titulo:"Estado + Sociedade Civil",
+tema:"Participação social",
+dificuldade:"Intermediário",
+xp:75,
+comic:[
+["🏛️","O Estado possui responsabilidades."],
+["👥","E a sociedade civil também pode participar."],
+["🤝","Então a defesa dos direitos envolve diferentes atores sociais?"],
+["👩‍🏫","Exatamente."]
+],
+pergunta:"A garantia dos Direitos Humanos envolve:",
+opcoes:[
+"Atuação do Estado e participação da sociedade civil.",
+"Apenas atuação individual.",
+"Somente empresas.",
+"Apenas decisões privadas."
+],
+correta:0
+},
+
+{
+titulo:"Desafio Final — Direitos na Prática",
+tema:"Integração dos conceitos",
+dificuldade:"Difícil",
+xp:150,
+comic:[
+["🏫","A lei afirma que todos têm direito à educação."],
+["🧑","Mas determinados grupos encontram maiores dificuldades para acessar uma escola de qualidade."],
+["👩‍🏫","Isso mostra a diferença entre igualdade formal e acesso real."],
+["👥","Políticas públicas podem enfrentar essas desigualdades."],
+["🤝","E a sociedade civil também pode participar da defesa desses direitos."]
+],
+pergunta:"Uma comunidade possui formalmente direito à educação, porém enfrenta desigualdade de acesso devido às condições sociais. Qual interpretação integra melhor os conceitos estudados?",
+opcoes:[
+"Existe uma distância entre cidadania formal e cidadania real, sendo necessárias políticas públicas e participação social para enfrentar desigualdades.",
+"O direito deixa de existir porque há desigualdade.",
+"A desigualdade prova que os Direitos Humanos não são universais.",
+"A responsabilidade é exclusivamente individual.",
+"Somente a existência da lei resolve automaticamente a desigualdade."
+],
+correta:0
+}
+
+];
+
+
+/* =====================================================
+   VARIÁVEIS
+===================================================== */
+
+let missoes = [];
+let atual = 0;
+let acertos = 0;
+let xp = 0;
+let respondeu = false;
+
+
+/* =====================================================
+   EMBARALHAMENTO
+===================================================== */
+
+/*
+   Fisher-Yates:
+   garante uma nova ordem das questões a cada carregamento.
+*/
+
+function embaralhar(array){
+
+    let copia = [...array];
+
+    for(let i = copia.length - 1; i > 0; i--){
+
+        const j = Math.floor(Math.random() * (i + 1));
+
+        [copia[i], copia[j]] =
+        [copia[j], copia[i]];
+    }
+
+    return copia;
+}
+
+
+/*
+   Prepara as alternativas.
+
+   IMPORTANTE:
+   A resposta correta é atualizada depois
+   que as alternativas são embaralhadas.
+*/
+
+function prepararMissao(missao){
+
+    let alternativas = missao.opcoes.map((texto,index)=>({
+
+        texto:texto,
+
+        correta:index === missao.correta
+
+    }));
+
+    alternativas = embaralhar(alternativas);
+
+    return {
+
+        ...missao,
+
+        alternativas:alternativas
+
+    };
+}
+
+
+/* =====================================================
+   INICIAR
+===================================================== */
+
+function iniciar(){
+
+    const nome =
+        document.getElementById("nome").value.trim();
+
+    const turma =
+        document.getElementById("turma").value.trim();
+
+    if(!nome){
+
+        alert("Digite seu nome para começar.");
+
+        return;
+    }
+
+    /*
+       PRIMEIRO:
+       embaralha a ordem das 20 questões.
+
+       SEGUNDO:
+       embaralha as alternativas de cada questão.
+    */
+
+    missoes = embaralhar(bancoMissoes)
+        .map(missao => prepararMissao(missao));
+
+    document.getElementById("nomeAluno").textContent =
+        nome + (turma ? " — " + turma : "");
+
+    document.getElementById("inicio")
+        .classList.add("hidden");
+
+    document.getElementById("jogo")
+        .classList.remove("hidden");
+
+    montarMapa();
+
+    mostrarQuestao();
+}
+
+
+/* =====================================================
+   MOSTRAR QUESTÃO
+===================================================== */
+
+function mostrarQuestao(){
+
+    respondeu = false;
+
+    const m = missoes[atual];
+
+    document.getElementById("numero")
+        .textContent = atual + 1;
+
+    document.getElementById("barra")
+        .style.width =
+        ((atual + 1) / missoes.length * 100) + "%";
+
+    document.getElementById("titulo")
+        .textContent = m.titulo;
+
+    document.getElementById("tema")
+        .textContent = "📚 " + m.tema;
+
+    const dificuldade =
+        document.getElementById("dificuldade");
+
+    dificuldade.textContent =
+        m.dificuldade.toUpperCase();
+
+    dificuldade.className = "badge";
+
+    if(m.dificuldade === "Fácil")
+        dificuldade.classList.add("facil");
+
+    if(m.dificuldade === "Intermediário")
+        dificuldade.classList.add("medio");
+
+    if(m.dificuldade === "Difícil")
+        dificuldade.classList.add("dificil");
+
+
+    /* QUADRINHOS */
+
+    const comic =
+        document.getElementById("comic");
+
+    comic.innerHTML = "";
+
+    m.comic.forEach(p => {
+
+        const panel =
+            document.createElement("div");
+
+        panel.className = "panel";
+
+        panel.innerHTML = `
+            <div class="person">${p[0]}</div>
+            <div class="fala">${p[1]}</div>
+        `;
+
+        comic.appendChild(panel);
+
+    });
+
+
+    /* PERGUNTA */
+
+    document.getElementById("pergunta")
+        .textContent = m.pergunta;
+
+
+    /* ALTERNATIVAS */
+
+    const container =
+        document.getElementById("alternativas");
+
+    container.innerHTML = "";
+
+    const letras = ["A","B","C","D","E"];
+
+    m.alternativas.forEach((opcao,index)=>{
+
+        const botao =
+            document.createElement("button");
+
+        botao.className = "option";
+
+        botao.innerHTML =
+            `<strong>${letras[index]})</strong> ${opcao.texto}`;
+
+        botao.onclick =
+            () => responder(index,botao);
+
+        container.appendChild(botao);
+
+    });
+
+
+    document.getElementById("feedback")
+        .className = "hidden";
+
+    document.getElementById("feedback")
+        .innerHTML = "";
+
+    document.getElementById("proxima")
+        .classList.add("hidden");
+
+    atualizarMapa();
+}
+
+
+/* =====================================================
+   RESPONDER
+===================================================== */
+
+function responder(indice,botao){
+
+    if(respondeu) return;
+
+    respondeu = true;
+
+    const m = missoes[atual];
+
+    const botoes =
+        document.querySelectorAll(".option");
+
+    botoes.forEach((b,i)=>{
+
+        b.disabled = true;
+
+        if(m.alternativas[i].correta){
+
+            b.classList.add("correct");
+
+        }
+
+    });
+
+
+    const feedback =
+        document.getElementById("feedback");
+
+
+    if(m.alternativas[indice].correta){
+
+        acertos++;
+
+        xp += m.xp;
+
+        botao.classList.add("correct");
+
+        feedback.className =
+            "feedback ok";
+
+        feedback.innerHTML =
+            `✅ <strong>Resposta correta!</strong><br>
+             Você ganhou <strong>+${m.xp} XP</strong>.`;
+
+    }else{
+
+        xp += 10;
+
+        botao.classList.add("wrong");
+
+        feedback.className =
+            "feedback no";
+
+        feedback.innerHTML =
+            `❌ <strong>Resposta incorreta.</strong><br>
+             A alternativa correta está destacada em verde.<br>
+             Você recebeu <strong>+10 XP</strong> pela tentativa.`;
+
+    }
+
+
+    document.getElementById("xp")
+        .textContent = xp;
+
+    document.getElementById("proxima")
+        .classList.remove("hidden");
+
+    atualizarMapa();
+}
+
+
+/* =====================================================
+   PRÓXIMA QUESTÃO
+===================================================== */
+
+function proximaQuestao(){
+
+    atual++;
+
+    if(atual >= missoes.length){
+
+        finalizar();
+
+        return;
+    }
+
+    mostrarQuestao();
+}
+
+
+/* =====================================================
+   MAPA
+===================================================== */
+
+function montarMapa(){
+
+    const mapa =
+        document.getElementById("mapa");
+
+    mapa.innerHTML = "";
+
+    for(let i=0;i<20;i++){
+
+        const div =
+            document.createElement("div");
+
+        div.className = "mission";
+
+        div.id = "mapa-" + i;
+
+        div.innerHTML =
+            `🎯<br>Missão ${i+1}`;
+
+        mapa.appendChild(div);
+    }
+}
+
+
+function atualizarMapa(){
+
+    for(let i=0;i<20;i++){
+
+        const item =
+            document.getElementById("mapa-" + i);
+
+        item.classList.remove(
+            "done",
+            "current"
+        );
+
+        if(i < atual)
+            item.classList.add("done");
+
+        if(i === atual)
+            item.classList.add("current");
+
+    }
+}
+
+
+/* =====================================================
+   FINAL
+===================================================== */
+
+function finalizar(){
+
+    document.getElementById("jogo")
+        .classList.add("hidden");
+
+    document.getElementById("final")
+        .classList.remove("hidden");
+
+
+    const nota =
+        (acertos / 20) * 10;
+
+    document.getElementById("nota")
+        .textContent = nota.toFixed(1);
+
+    document.getElementById("acertos")
+        .textContent = acertos;
+
+    document.getElementById("xpFinal")
+        .textContent = xp;
+
+
+    let mensagem = "";
+
+    if(nota >= 9){
+
+        mensagem =
+        "🏆 Excelente! Você demonstrou ótimo domínio dos conceitos.";
+
+    }else if(nota >= 7){
+
+        mensagem =
+        "👏 Muito bom! Você compreendeu grande parte dos conceitos.";
+
+    }else if(nota >= 5){
+
+        mensagem =
+        "📚 Bom trabalho! Revise os conceitos que apresentaram dificuldade.";
+
+    }else{
+
+        mensagem =
+        "💪 Continue estudando! A revisão dos conteúdos ajudará na próxima tentativa.";
+
+    }
+
+    document.getElementById("mensagemFinal")
+        .textContent = mensagem;
+}
+
+</script>
+
+</body>
+</html>
